@@ -1,13 +1,157 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+    --window-light-bg: #EDEDEE;
+    --window-light-barrier: #B7BBBB;
+    --window-dark-bg: #2A2C2E;
+    --window-dark-barrier: #000000;
+    --window-curve: 0.7em;
+    --image-curve: 1.5em;
+
+    --first-light-background-color: white;
+    --second-light-background-color: #EEEEEE;
+
+    --window-top-height: 2em;
+
+    /* Top Window Buttons */
+    --close-color: #FF6158;
+    --minimize-color: #FEBD2D;
+    --maximize-color: #2DC940;
+    --window-top-button-size: 0.8em;
+
+    /* Fonts */
+    --main-font: SF-pro
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@font-face {
+    font-family: SF-pro;
+    src: url(assets/fonts/SF-Pro.ttf);
+}
+
+#initial-view {
+    height:100vh;
+    background-color:var(--background-light-color);
+}
+.section-title {
+    padding: 0;
+    margin: 1em 0 1em 5vw;
+}
+.title-name {
+    font-weight: lighter;
+    font-size: 35pt;
+    padding: 0;
+    margin: 0;
+    font-family: var(--main-font)
+}
+.title-subname {
+    font-weight: lighter;
+    font-size: 17pt;
+    padding: 0;
+    margin: 0;
+    color: gray;
+    font-family: var(--main-font)
+}
+
+#window {
+    width: 80vw;
+    margin: auto;
+    padding: 0;
+    background-color: var(--window-light-bg);
+    border-radius: var(--window-curve);
+    border: 1px solid var(--window-light-barrier)
+}
+
+#window-top {
+    width: 100%;
+    height: var(--window-top-height);
+    background-color: var(--window-top-light-bg);
+    border-radius: var(--window-curve) var(--window-curve) 0 0;
+    box-shadow: 0px 1px 1px var(--window-light-barrier);
+}
+#window-body {
+    width: 100%;
+    height:calc(100% - var(--window-top-height));
+}
+
+#window-buttons{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 0 0 0.8em;
+    height: 100%;
+    gap: 0.4em;
+}
+
+#window-close {
+    border-radius: 100%;
+    width: var(--window-top-button-size);
+    height: var(--window-top-button-size);
+    background-color: var(--close-color);
+}
+
+#window-minimize {
+    border-radius: 100%;
+    width: var(--window-top-button-size);
+    height: var(--window-top-button-size);
+    background-color: var(--minimize-color);
+}
+
+#window-maximize {
+    border-radius: 100%;
+    width: var(--window-top-button-size);
+    height: var(--window-top-button-size);
+    background-color: var(--maximize-color);
+}
+
+#main-portrait {
+    height: 30em;
+    width: auto;
+    padding: 0;
+    margin:0;
+    border: 1px solid var(--window-light-barrier);
+    border-radius: var(--image-curve);
+}
+
+#window-body-divider {
+    margin: 2em;
+    height: auto;
+    gap: 2em;
+    width: fit-content;
+    display: flex;
+    justify-content: left;
+}
+
+#window-bio {
+    font-family: var(--main-font);
+    font-weight: lighter;
+    font-size: 1.5em;
+}
+
+.emphasize {
+    font-size: 1.45em;
+    font-weight: normal;
+}
+
+#web-projects-section {
+    width: auto;
+    background-color: var(--second-light-background-color);
+    padding: 0.75em 0 7.5em 0;
+}
+
+#software-projects-section {
+    width: auto;
+    background-color: var(--first-light-background-color);
+    height: auto;
+}
+
+#personal-projects-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2em;
+}
+
+.card {
+    width: 20em;
+    height: 30em;
+    background-color: red;
+    border-radius: var(--image-curve);
 }
