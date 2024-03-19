@@ -28,7 +28,7 @@ export default function Main() {
                                 </div>
                                 <div id="window-bio">
                                     <div id="bio-title">
-                                        <p className={"title-name"}>JL</p>
+                                        <p className={"title-name"}>Joshua Lees</p>
                                         <p className={"title-subname"}>@jleescy</p>
                                     </div>
                                     <div id="socials">
