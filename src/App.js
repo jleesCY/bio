@@ -1,15 +1,17 @@
 import {isMobile} from 'react-device-detect';
-import DesktopMain from './components/DesktopMain';
+import Main from './components/Main';
 
 export default function App() {
     // render mobile view
     if (isMobile) {
-
+        return (
+            <Main></Main>
+        )
     }
     // render desktop view
     else {
         return (
-            <DesktopMain></DesktopMain>
+            <Main></Main>
         )
     }
 }
