@@ -1,1 +1,1 @@
-[https://bio.jleescy.com](https://bio.jleescy.com)
+[https://jleescy.github.io/bio/](https://jleescy.github.io/bio/)
