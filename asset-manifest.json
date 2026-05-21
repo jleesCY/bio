@@ -1,21 +1,33 @@
 {
   "files": {
-    "main.css": "/bio/static/css/main.be0d75d0.css",
-    "main.js": "/bio/static/js/main.46dcc6d5.js",
+    "main.css": "/bio/static/css/main.f96ca976.css",
+    "main.js": "/bio/static/js/main.725c22e6.js",
+    "static/js/924.78cfaba2.chunk.js": "/bio/static/js/924.78cfaba2.chunk.js",
+    "static/js/222.9392d9fb.chunk.js": "/bio/static/js/222.9392d9fb.chunk.js",
+    "static/js/501.b7e168aa.chunk.js": "/bio/static/js/501.b7e168aa.chunk.js",
+    "static/js/877.55691fa8.chunk.js": "/bio/static/js/877.55691fa8.chunk.js",
     "static/js/453.a95e9d1c.chunk.js": "/bio/static/js/453.a95e9d1c.chunk.js",
     "static/media/SF-Pro.ttf": "/bio/static/media/SF-Pro.26de8db493c0fa76e754.ttf",
+    "static/media/main-portrait.jpeg": "/bio/static/media/main-portrait.89597a81955b72988947.jpeg",
     "static/media/bg-light.jpeg": "/bio/static/media/bg-light.4e2bc9d28d90af082226.jpeg",
-    "static/media/main-portrait.jpeg": "/bio/static/media/main-portrait.1395d8597a537ee9eaac.jpeg",
+    "static/media/bg-dark.jpeg": "/bio/static/media/bg-dark.633b858913565d9f66ab.jpeg",
     "static/media/github.svg": "/bio/static/media/github.8d1bc524d64f25bee143d25b34c557ac.svg",
     "static/media/instagram.svg": "/bio/static/media/instagram.a0a9a83448ddb5827d70493a84d37806.svg",
+    "static/media/01-welcome.md": "/bio/static/media/01-welcome.31fa9c4fe47c1a977ae0.md",
+    "static/media/mi-browser.md": "/bio/static/media/mi-browser.e99f2099a095597b86a1.md",
     "static/media/linkedin.svg": "/bio/static/media/linkedin.c341cc1c307221b0fe42599c619ceeaf.svg",
+    "static/media/nandbox.md": "/bio/static/media/nandbox.89b9b212fda3617ddada.md",
+    "static/media/letter-boxed.md": "/bio/static/media/letter-boxed.216a6c55bfd0ff9cef09.md",
     "index.html": "/bio/index.html",
-    "main.be0d75d0.css.map": "/bio/static/css/main.be0d75d0.css.map",
-    "main.46dcc6d5.js.map": "/bio/static/js/main.46dcc6d5.js.map",
+    "static/media/box.svg": "/bio/static/media/box.fb3148b7f3aaeccff8677df074d4d3ab.svg",
+    "static/media/browser.svg": "/bio/static/media/browser.59ece65c0cb1c0624925859e6341b4e7.svg",
+    "static/media/logic-gate.svg": "/bio/static/media/logic-gate.b6aa8d3455925005cb31d1d2214f8fb2.svg",
+    "main.f96ca976.css.map": "/bio/static/css/main.f96ca976.css.map",
+    "main.725c22e6.js.map": "/bio/static/js/main.725c22e6.js.map",
     "453.a95e9d1c.chunk.js.map": "/bio/static/js/453.a95e9d1c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.be0d75d0.css",
-    "static/js/main.46dcc6d5.js"
+    "static/css/main.f96ca976.css",
+    "static/js/main.725c22e6.js"
   ]
 }
