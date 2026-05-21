@@ -8,6 +8,7 @@ export default function Social(props) {
             }} 
             className="social-image" 
             src={props.image}
+            alt="Social link"
             onClick={() => {window.location.href = props.url}}></img>
     )
 }
