@@ -38,7 +38,7 @@ const Icons = {
     )
 };
 
-export default function Dock({ windowState }) {
+export default function Dock({ windowState, setWindowState }) {
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -58,7 +58,12 @@ export default function Dock({ windowState }) {
                     <div 
                         key={item.id}
                         className={`dock-item ${isActive ? 'active' : ''}`}
-                        onClick={() => navigate(`/${item.id}`)}
+                        onClick={() => {
+                            navigate(`/${item.id}`);
+                            if (windowState === 'closed' || windowState === 'minimized') {
+                                setWindowState('normal');
+                            }
+                        }}
                     >
                         <div className="dock-icon">
                             {item.icon}
@@ -69,7 +74,7 @@ export default function Dock({ windowState }) {
                 );
             })}
             <div style={{ width: '1px', background: 'var(--dock-border)', margin: '0 0.5em' }}></div>
-            <div className="theme-toggle-item" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div className="theme-toggle-item" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, padding: '0 0.5em' }}>
                 <ThemeToggle />
             </div>
         </div>

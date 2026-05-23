@@ -7,13 +7,12 @@ import githubLogo from "../../assets/images/svgs/github.svg";
 import linkedinLogo from "../../assets/images/svgs/linkedin.svg";
 
 import { blogPosts } from "../../data/blog";
-import { personalProjects } from "../../data/projectsData";
+import { personalProjects, professionalProjects } from "../../data/projectsData";
 import { toolkitSkills, professionalConcepts, personalConcepts, professionalDescription, personalDescription } from "../../data/homeData";
-import ProjectCard from "../ProjectCard";
 
 export default function Home() {
     const navigate = useNavigate();
-    const sortedPosts = [...blogPosts].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 2);
+    const allProjectsCount = personalProjects.length + professionalProjects.length;
 
     return (
         <div className="view-container fade-in">
@@ -127,46 +126,60 @@ export default function Home() {
                     </div>
                 </div>
                 
-                {/* Active Projects Section */}
-                <div style={{ animation: '0.4s ease-out 0s 1 both slowFadeUp' }}>
-                    <h3 style={{ fontSize: '1em', textTransform: 'uppercase', letterSpacing: '0.2em', color: 'var(--text-muted)', marginBottom: '2em', textAlign: 'center' }}>Active Projects</h3>
-                    <div className="projects-grid">
-                        {personalProjects.filter(p => p.isActive).map((project, idx) => (
-                            <ProjectCard
-                                key={idx}
-                                title={project.title}
-                                description={project.description}
-                                link={project.link}
-                                image={project.image}
-                                tags={project.tags}
-                                onClick={() => navigate(`/projects/${project.id}`)}
-                            />
-                        ))}
+                {/* Explore Directory Section */}
+                <div style={{ animation: '0.6s ease-out 0.3s 1 both slowFadeUp', marginTop: '2em', paddingBottom: '2em' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2em', maxWidth: '800px', margin: '0 auto' }}>
+                        <div 
+                            className="widget-card" 
+                            onClick={() => navigate('/projects')} 
+                            style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}
+                        >
+                            <div style={{ background: 'var(--window-bg)', border: '1px solid var(--window-barrier)', padding: '1.2em', borderRadius: '50%', marginBottom: '1.5em', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--text-primary)' }}>
+                                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                                </svg>
+                            </div>
+                            <h3 style={{ margin: '0 0 0.5em 0', color: 'var(--text-primary)', fontSize: '1.4em' }}>Projects</h3>
+                            <p style={{ margin: '0 0 1.5em 0', color: 'var(--text-secondary)', fontSize: '1em', lineHeight: '1.5' }}>Explore my portfolio of web apps, tools, and technical experiments.</p>
+                            <span style={{ color: 'var(--text-primary)', fontWeight: '600', fontSize: '0.95em', padding: '0.5em 1em', borderRadius: '2em', background: 'var(--window-bg)', border: '1px solid var(--window-barrier)' }}>View {allProjectsCount} Projects &rarr;</span>
+                        </div>
+                        
+                        <div 
+                            className="widget-card" 
+                            onClick={() => navigate('/blog')} 
+                            style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}
+                        >
+                            <div style={{ background: 'var(--window-bg)', border: '1px solid var(--window-barrier)', padding: '1.2em', borderRadius: '50%', marginBottom: '1.5em', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--text-primary)' }}>
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14 2 14 8 20 8"></polyline>
+                                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                                    <polyline points="10 9 9 9 8 9"></polyline>
+                                </svg>
+                            </div>
+                            <h3 style={{ margin: '0 0 0.5em 0', color: 'var(--text-primary)', fontSize: '1.4em' }}>Notes & Thoughts</h3>
+                            <p style={{ margin: '0 0 1.5em 0', color: 'var(--text-secondary)', fontSize: '1em', lineHeight: '1.5' }}>Read my latest articles, technical deep-dives, and design thoughts.</p>
+                            <span style={{ color: 'var(--text-primary)', fontWeight: '600', fontSize: '0.95em', padding: '0.5em 1em', borderRadius: '2em', background: 'var(--window-bg)', border: '1px solid var(--window-barrier)' }}>Read {blogPosts.length} Notes &rarr;</span>
+                        </div>
                     </div>
                 </div>
 
-                {/* Latest Notes Widget */}
-                <div style={{ animation: '0.8s ease-out 0.5s 1 both slowFadeUp', marginTop: '2em', paddingBottom: '2em' }}>
-                    <h3 style={{ fontSize: '1em', textTransform: 'uppercase', letterSpacing: '0.2em', color: 'var(--text-muted)', marginBottom: '2em', textAlign: 'center' }}>Latest Notes</h3>
-                    <div className="latest-notes-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2em', maxWidth: '800px', margin: '0 auto' }}>
-                        {sortedPosts.map(post => (
-                            <div 
-                                key={post.id} 
-                                className="latest-note-card glass-panel" 
-                                onClick={() => navigate(`/blog/${post.id}`)}
-                                style={{ 
-                                    padding: '2em', 
-                                    cursor: 'pointer',
-                                    borderRadius: '1em',
-                                    transition: 'transform 0.2s ease, box-shadow 0.2s ease'
-                                }}
-                            >
-                                <span style={{ fontSize: '0.85em', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{post.date}</span>
-                                <h4 style={{ margin: '0.5em 0', color: 'var(--text-primary)', fontSize: '1.2em' }}>{post.title}</h4>
-                                <p style={{ margin: '0', fontSize: '0.95em', color: 'var(--text-secondary)', lineHeight: '1.5' }}>{post.description}</p>
-                            </div>
-                        ))}
-                    </div>
+                {/* Footer Verse */}
+                <div style={{ animation: '0.8s ease-out 0.6s 1 both slowFadeUp', textAlign: 'center', marginTop: '2em', paddingBottom: '4em' }}>
+                    <p style={{ color: 'var(--text-muted)', fontStyle: 'italic', fontSize: '0.95em', maxWidth: '600px', margin: '0 auto', lineHeight: '1.6' }}>
+                        "Whatever you do, work heartily, as for the Lord and not for men, knowing that from the Lord you will receive the inheritance as your reward. You are serving the Lord Christ."
+                    </p>
+                    <a 
+                        href="https://www.biblegateway.com/passage/?search=Colossians%203:23-24&version=ESV" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        style={{ display: 'block', marginTop: '0.8em', color: 'var(--text-muted)', fontSize: '0.85em', fontWeight: '600', letterSpacing: '0.05em', textDecoration: 'none' }}
+                        onMouseEnter={e => e.currentTarget.style.color = 'var(--text-primary)'}
+                        onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}
+                    >
+                        Colossians 3:23-24 (ESV)
+                    </a>
                 </div>
 
             </div>

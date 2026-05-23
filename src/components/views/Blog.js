@@ -23,21 +23,26 @@ export default function Blog() {
     if (selectedPost) {
         return (
             <div className="view-container fade-in">
-                <button 
-                    onClick={() => navigate('/blog')}
-                    style={{
-                        marginBottom: '1em',
-                        padding: '0.5em 1em',
-                        borderRadius: '0.5em',
-                        border: '1px solid var(--window-barrier)',
-                        background: 'var(--window-bg)',
-                        color: 'var(--text-primary)',
-                        cursor: 'pointer',
-                        fontFamily: 'var(--main-font)'
-                    }}
-                >
-                    &larr; Back to Posts
-                </button>
+                <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: '1em' }}>
+                    <button 
+                        onClick={() => navigate('/blog')}
+                        style={{
+                            padding: '0.6em 1.2em',
+                            borderRadius: '0.5em',
+                            border: '1px solid var(--window-barrier)',
+                            background: 'var(--window-bg)',
+                            color: 'var(--text-primary)',
+                            cursor: 'pointer',
+                            fontFamily: 'var(--main-font)',
+                            fontWeight: '600',
+                            transition: 'background 0.2s ease'
+                        }}
+                        onMouseEnter={e => e.currentTarget.style.background = 'var(--card-bg)'}
+                        onMouseLeave={e => e.currentTarget.style.background = 'var(--window-bg)'}
+                    >
+                        &larr; Back to Posts
+                    </button>
+                </div>
                 <div className="markdown-container">
                     <ReactMarkdown>{markdownContent}</ReactMarkdown>
                 </div>
@@ -61,7 +66,7 @@ export default function Blog() {
                         {[...blogPosts].sort((a, b) => new Date(b.date) - new Date(a.date)).map((post) => (
                             <div 
                                 key={post.id} 
-                                className="blog-card"
+                                className="editorial-item"
                                 onClick={() => navigate(`/blog/${post.id}`)}
                             >
                                 <span style={{ fontSize: '0.9em', color: 'var(--text-muted)', marginBottom: '0.5em', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{post.date}</span>

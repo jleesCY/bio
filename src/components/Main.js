@@ -59,7 +59,7 @@ function MainContent() {
                     </div>
                 </div>
             </div>
-            <Dock windowState={windowState} />
+            <Dock windowState={windowState} setWindowState={setWindowState} />
         </div>
     );
 }

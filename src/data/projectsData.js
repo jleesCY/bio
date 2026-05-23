@@ -57,13 +57,13 @@ export const personalProjects = [
 ];
 
 export const professionalProjects = [
-    {
-        id: "professional-work",
-        title: "Professional Work",
-        description: "Details about my professional projects and contributions.",
-        link: "#",
-        tags: ["Enterprise", "Collaboration"],
-        isActive: false,
-        details: null
-    }
+    // {
+    //     id: "professional-work",
+    //     title: "Professional Work",
+    //     description: "Details about my professional projects and contributions.",
+    //     link: "#",
+    //     tags: ["Enterprise", "Collaboration"],
+    //     isActive: false,
+    //     details: null
+    // }
 ];
