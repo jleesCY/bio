@@ -1,14 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import ReactMarkdown from 'react-markdown';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import ProjectCard from "../ProjectCard";
 import { personalProjects, professionalProjects } from "../../data/projectsData";
-
 import githubLogo from "../../assets/images/svgs/github.svg";
 
 export default function Projects() {
     const { projectId } = useParams();
     const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState("all");
+    const [isDark, setIsDark] = useState(document.body.classList.contains('dark-theme'));
+
+    useEffect(() => {
+        const observer = new MutationObserver(() => {
+            setIsDark(document.body.classList.contains('dark-theme'));
+        });
+        observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+        return () => observer.disconnect();
+    }, []);
 
     const allProjects = [...professionalProjects, ...personalProjects];
     const selectedProject = projectId ? allProjects.find(p => p.id === projectId) : null;
@@ -19,8 +30,20 @@ export default function Projects() {
             ? professionalProjects 
             : personalProjects;
 
+    const [markdownContent, setMarkdownContent] = useState("");
+
+    useEffect(() => {
+        if (selectedProject && selectedProject.file) {
+            import(`../../data/projects/${selectedProject.file}`)
+                .then(res => fetch(res.default))
+                .then(res => res.text())
+                .then(text => setMarkdownContent(text))
+                .catch(err => console.error("Error loading markdown:", err));
+        }
+    }, [selectedProject]);
+
     // Project Details View
-    if (selectedProject && selectedProject.details) {
+    if (selectedProject && selectedProject.file) {
         return (
             <div className="view-container fade-in">
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3em' }}>
@@ -62,43 +85,47 @@ export default function Projects() {
                         ))}
                     </div>
 
-                    <div className="project-details-section">
-                        <h3>The Details</h3>
-                        {Array.isArray(selectedProject.details) 
-                            ? selectedProject.details.map((paragraph, i) => (
-                                <p key={i}>{paragraph}</p>
-                            ))
-                            : <p>{selectedProject.details}</p>
-                        }
-                    </div>
-
-                    <div className="project-details-section">
-                        <h3>Key Features</h3>
-                        <ul>
-                            {selectedProject.features.map((feature, i) => (
-                                <li key={i}>
-                                    <strong style={{ color: 'var(--text-primary)' }}>{feature.split(':')[0]}:</strong>
-                                    {feature.split(':')[1]}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    <div className="project-details-section">
-                        <h3>Technical Challenges</h3>
-                        <div className="project-challenge-block">
-                            {Array.isArray(selectedProject.challenges)
-                                ? selectedProject.challenges.map((paragraph, i) => (
-                                    <p key={i} style={i === 0 ? { marginTop: 0 } : { marginTop: '1em' }}>{paragraph}</p>
-                                ))
-                                : <p style={{ margin: 0 }}>{selectedProject.challenges}</p>
-                            }
-                        </div>
+                    <div className="markdown-container" style={{ marginTop: '3em' }}>
+                        <ReactMarkdown
+                            components={{
+                                code({node, inline, className, children, ...props}) {
+                                    const match = /language-(\w+)/.exec(className || '')
+                                    return !inline && match ? (
+                                        <SyntaxHighlighter
+                                            {...props}
+                                            children={String(children).replace(/\n$/, '')}
+                                            style={isDark ? vscDarkPlus : oneLight}
+                                            language={match[1]}
+                                            codeTagProps={{
+                                                style: {
+                                                    fontFamily: "'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace"
+                                                }
+                                            }}
+                                            customStyle={{
+                                                backgroundColor: 'transparent',
+                                                padding: 0,
+                                                margin: 0,
+                                                fontSize: '0.95em',
+                                                borderRadius: '0.5em',
+                                                border: 'none',
+                                                fontFamily: "'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace"
+                                            }}
+                                        />
+                                    ) : (
+                                        <code {...props} className={className}>
+                                            {children}
+                                        </code>
+                                    )
+                                }
+                            }}
+                        >
+                            {markdownContent}
+                        </ReactMarkdown>
                     </div>
 
                     <div className="project-links">
                         <a href={selectedProject.link} target="_blank" rel="noopener noreferrer" className="project-link-btn">
-                            <img src={githubLogo} alt="GitHub" style={{ width: '20px', height: '20px', filter: 'brightness(0) invert(1)' }} />
+                            <img src={githubLogo} alt="GitHub" style={{ width: '20px', height: '20px', filter: 'var(--github-filter)' }} />
                             View Source
                         </a>
                     </div>
@@ -129,7 +156,7 @@ export default function Projects() {
         <div className="view-container fade-in">
             <div className="page-hero" style={{ background: 'linear-gradient(135deg, rgba(161,85,185,0.1), transparent)' }}>
                 <h2 className="page-hero-title">Projects</h2>
-                <p className="page-hero-subtitle">A showcase of things I've built.</p>
+                <p className="page-hero-subtitle">A select showcase of things I've built both personally and professionally.</p>
             </div>
             
             <div className="projects-tabs">
@@ -139,17 +166,17 @@ export default function Projects() {
                 >
                     All
                 </button>
+                <button
+                    className={`tab-button ${activeTab === 'personal' ? 'active' : ''}`}
+                    onClick={() => setActiveTab('personal')}
+                >
+                    Personal
+                </button>
                 <button 
                     className={`tab-button ${activeTab === 'professional' ? 'active' : ''}`}
                     onClick={() => setActiveTab('professional')}
                 >
                     Professional
-                </button>
-                <button 
-                    className={`tab-button ${activeTab === 'personal' ? 'active' : ''}`}
-                    onClick={() => setActiveTab('personal')}
-                >
-                    Personal
                 </button>
             </div>
 

@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import mainPortrait from "../../assets/images/main-portrait.jpeg";
 import Social from "../Social";
-import instagramLogo from "../../assets/images/svgs/instagram.svg";
-import githubLogo from "../../assets/images/svgs/github.svg";
-import linkedinLogo from "../../assets/images/svgs/linkedin.svg";
 
 import { blogPosts } from "../../data/blog";
 import { personalProjects, professionalProjects } from "../../data/projectsData";
 import { toolkitSkills, professionalConcepts, personalConcepts, professionalDescription, personalDescription } from "../../data/homeData";
+import instagramLogo from "../../assets/images/svgs/instagram.svg";
+import githubLogo from "../../assets/images/svgs/github.svg";
+import linkedinLogo from "../../assets/images/svgs/linkedin.svg";
 
 export default function Home() {
     const navigate = useNavigate();
@@ -28,10 +28,18 @@ export default function Home() {
                     <p className="hero-description" style={{ fontSize: '1.1em', lineHeight: '1.7', color: 'var(--text-secondary)', fontWeight: '300' }}>
                         Modeling & Simulation Engineer specializing in advanced DoD <span className="highlight-text">simulation frameworks</span>. I work with complex <span className="highlight-text">LVC</span> environments and <span className="highlight-text">SIL</span> dataflows to extract and translate critical data into <span className="highlight-text">high-performance</span> databases and intuitive, live analysis UIs. Off-duty, I bring that same passion for hardware-accelerated design to <span className="highlight-text">creative web development</span>.
                     </p>
-                    <div id="socials" className="hero-socials">
-                        <Social image={githubLogo} url={"https://github.com/jleesCY"} size={2.5}></Social>
-                        <Social image={linkedinLogo} url={"https://www.linkedin.com/in/joshuamlees/"} size={3.15}></Social>
-                        <Social image={instagramLogo} url={"https://www.instagram.com/jleescy/"} size={2.8}></Social>
+                    <div className="hero-socials-minimal">
+                        <a href="https://github.com/jleesCY" target="_blank" rel="noopener noreferrer" className="social-link">
+                            <img src={githubLogo} alt="GitHub" style={{ filter: 'var(--github-filter)' }} /> GitHub
+                        </a>
+                        <span className="social-divider">|</span>
+                        <a href="https://www.linkedin.com/in/joshuamlees/" target="_blank" rel="noopener noreferrer" className="social-link">
+                            <img src={linkedinLogo} alt="LinkedIn" /> LinkedIn
+                        </a>
+                        <span className="social-divider">|</span>
+                        <a href="https://www.instagram.com/jleescy/" target="_blank" rel="noopener noreferrer" className="social-link">
+                            <img src={instagramLogo} alt="Instagram" /> Instagram
+                        </a>
                     </div>
                     {isMobile && (
                         <div style={{ 

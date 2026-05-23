@@ -1,17 +1,24 @@
-# mi-browser
+### Details
+mi. Browser is an open-source, minimalist mobile browser engineered to eliminate viewport clutter and optimize one-handed navigation through a centralized, bottom-docked control module called 'The Pill'. Designed so that every primary interaction remains within natural thumb reach, users can execute diverse navigation commands, view history, and trigger layout changes via fluid gestures on the Pill itself. By stripping away legacy browser UI overhead, it provides a distraction-free canvas focused entirely on content delivery.
 
-A hyper-lightweight, distraction-free mobile browser designed for the modern web, featuring unique 3D visual effects.
+```python
+def main():
+  print("Hello, Horld!")
+```
 
-## Key Features
+Built with a strict privacy-native architecture, all application state—including history management, multi-tab sessions, and granular configuration profiles—is persisted locally using highly optimized `AsyncStorage` lookups. This architecture entirely eliminates network overhead for configuration changes, ensuring instantaneous state resolution, lightning-fast application launches, and complete data autonomy. 
 
-- **3D Perspective Effect**: A global 3D perspective effect on the main app container that reacts to your interactions.
-- **Custom History Management**: Efficiently manages your browsing history with unique IDs and timestamps.
-- **Unified Visual Style**: Consistent UI for bookmarks and tabs for a seamless user experience.
-- **Lightweight & Fast**: Built for speed and focus, removing unnecessary clutter from your browsing.
+Furthermore, the design philosophy prioritizes deep user agency. This is manifested in granular customizability engines that grant users absolute command over both the visual interface and backend behaviors, allowing the browser to adapt precisely to individual workflows.
 
-## Technologies Used
+To augment everyday utility, mi. Browser integrates a specialized "Power Tools" suite directly into the core dashboard. This lightweight utility ecosystem provides advanced capabilities—including an instantaneous QR code scanner/generator, a performant find-in-page utility, an isolated download manager, and an ad-blocking toggle—without compromising the browser's minimal footprint.
 
-- **React Native**: For building a high-performance mobile application.
-- **Expo**: To streamline development and deployment.
-- **TypeScript**: Ensuring type safety and robust code.
-- **AsyncStorage**: For persistent local storage of history and bookmarks.
+### Key Features
+- **The Control Pill:** A gesture-first navigation hub positioned for optimal ergonomic reach, leveraging directional swipe physics to manage page navigation, history logs, and core settings within a single component.
+- **Adaptive Design Engine:** A runtime configuration framework that empowers users to alter UI density, pill scaling, and interface corner geometry with real-time, application-wide style adaptation.
+- **Visual Tab & Bookmark Grid:** A structural management system utilizing unified, low-overhead grid layouts and isolated state handling for fluid context switching and efficient tab disposal.
+- **Integrated Power Tools:** A performance-focused utility suite embedded in the core dashboard, offering local QR parsing, text search, Reader View, and desktop user-agent toggles without draining system resources.
+
+### Technical Challenges
+Implementing a highly responsive, gesture-driven interface within React Native required careful optimization of the component layout hierarchy. Managing complex, real-time layout adaptations—such as fluid geometry scaling, dynamic runtime style injections, and active tab multi-grids—demanded strict state segregation and memoization strategies to eliminate rendering bottlenecks and maintain lag-free UI transitions.
+
+A pervasive challenge was enforcing a minimal memory footprint and lightweight performance profile on lower-end Android hardware. Webview instances are notoriously resource-intensive; running multiple tabs concurrently while maintaining a highly customizable UI engine threatened to trigger aggressive OS garbage collection and background app termination. To mitigate this, the architecture implements a strict pool-management strategy for passive tab instances, serializing cold tabs into localized state while aggressively purging active DOM nodes from memory. This ensures the app maintains an incredibly low runtime footprint, fast startup times, and near-zero battery drain during extended browsing sessions.

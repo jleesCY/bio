@@ -16,7 +16,7 @@ export default function ProjectCard({ title, description, link, image, tags, onC
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                         <h3>{title}</h3>
                         <div className="card-github-link" onClick={handleGithubClick} title="View Source on GitHub">
-                            <img src={githubLogo} alt="GitHub" style={{ width: '20px', height: '20px', filter: 'brightness(var(--dock-icon-color-filter, 1))' }} />
+                            <img src={githubLogo} alt="GitHub" style={{ width: '20px', height: '20px', filter: 'var(--github-filter)' }} />
                         </div>
                     </div>
                     <p>{description}</p>

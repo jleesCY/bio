@@ -1,12 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import ReactMarkdown from 'react-markdown';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { blogPosts } from "../../data/blog";
 
 export default function Blog() {
     const { blogId } = useParams();
     const navigate = useNavigate();
     const [markdownContent, setMarkdownContent] = useState("");
+    const [isDark, setIsDark] = useState(document.body.classList.contains('dark-theme'));
+
+    useEffect(() => {
+        const observer = new MutationObserver(() => {
+            setIsDark(document.body.classList.contains('dark-theme'));
+        });
+        observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+        return () => observer.disconnect();
+    }, []);
 
     const selectedPost = blogId ? blogPosts.find(p => p.id === blogId) : null;
 
@@ -44,7 +55,41 @@ export default function Blog() {
                     </button>
                 </div>
                 <div className="markdown-container">
-                    <ReactMarkdown>{markdownContent}</ReactMarkdown>
+                    <ReactMarkdown
+                        components={{
+                            code({node, inline, className, children, ...props}) {
+                                const match = /language-(\w+)/.exec(className || '')
+                                return !inline && match ? (
+                                    <SyntaxHighlighter
+                                        {...props}
+                                        children={String(children).replace(/\n$/, '')}
+                                        style={isDark ? vscDarkPlus : oneLight}
+                                        language={match[1]}
+                                        codeTagProps={{
+                                            style: {
+                                                fontFamily: "'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace"
+                                            }
+                                        }}
+                                        customStyle={{
+                                            backgroundColor: 'transparent',
+                                            padding: 0,
+                                            margin: 0,
+                                            fontSize: '0.95em',
+                                            borderRadius: '0.5em',
+                                            border: 'none',
+                                            fontFamily: "'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace"
+                                        }}
+                                    />
+                                ) : (
+                                    <code {...props} className={className}>
+                                        {children}
+                                    </code>
+                                )
+                            }
+                        }}
+                    >
+                        {markdownContent}
+                    </ReactMarkdown>
                 </div>
             </div>
         );
@@ -61,22 +106,39 @@ export default function Blog() {
                     <p style={{ color: "var(--text-secondary)", fontStyle: 'italic', fontSize: '1.2em' }}>Nothing to show here...</p>
                 </div>
             ) : (
-                <div className="blog-master-card" style={{ background: 'var(--card-bg)', borderRadius: 'var(--window-curve)', border: '1px solid var(--window-barrier)', boxShadow: '0 4px 20px var(--card-shadow)', overflow: 'hidden', animation: '0.4s ease-out 0s 1 both slowFadeUp' }}>
-                    <div className="editorial-list">
-                        {[...blogPosts].sort((a, b) => new Date(b.date) - new Date(a.date)).map((post) => (
-                            <div 
-                                key={post.id} 
-                                className="editorial-item"
-                                onClick={() => navigate(`/blog/${post.id}`)}
-                            >
-                                <span style={{ fontSize: '0.9em', color: 'var(--text-muted)', marginBottom: '0.5em', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{post.date}</span>
-                                <h3 style={{ margin: '0 0 0.2em 0', color: 'var(--text-primary)', fontSize: '1.8em', fontWeight: '700' }}>{post.title}</h3>
-                                <p style={{ margin: '0', color: 'var(--text-secondary)', lineHeight: '1.6', fontSize: '1.1em', maxWidth: '800px' }}>{post.description}</p>
-                            </div>
-                        ))}
-                    </div>
+                <div className="editorial-list" style={{ marginTop: '2em', animation: '0.4s ease-out 0s 1 both slowFadeUp' }}>
+                    {[...blogPosts].sort((a, b) => new Date(b.date) - new Date(a.date)).map((post) => (
+                        <div 
+                            key={post.id} 
+                            className="editorial-item"
+                            onClick={() => navigate(`/blog/${post.id}`)}
+                        >
+                            <span className="editorial-date">{post.date}</span>
+                            <h3 className="editorial-title">{post.title}</h3>
+                            <p className="editorial-desc">{post.description}</p>
+                        </div>
+                    ))}
                 </div>
             )}
+
+            {/* Footer Verse */}
+            <div style={{ animation: '0.8s ease-out 0.6s 1 both slowFadeUp', textAlign: 'center', marginTop: '4em', paddingBottom: '4em' }}>
+                <p style={{ color: 'var(--text-muted)', fontStyle: 'italic', fontSize: '0.95em', maxWidth: '600px', margin: '0 auto', lineHeight: '1.6' }}>
+                    "An intelligent heart acquires knowledge,<br />
+                    and the ear of the wise seeks knowledge."
+                </p>
+                <a 
+                    href="https://www.biblegateway.com/passage/?search=Proverbs+18:15&version=ESV" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    style={{ display: 'block', marginTop: '0.8em', color: 'var(--text-muted)', fontSize: '0.85em', fontWeight: '600', letterSpacing: '0.05em', textDecoration: 'none' }}
+                    onMouseEnter={e => e.currentTarget.style.color = 'var(--text-primary)'}
+                    onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}
+                >
+                    Proverbs 18:15 (ESV)
+                </a>
+            </div>
+
         </div>
     );
 }
