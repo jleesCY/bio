@@ -112,7 +112,12 @@ body {
     background-size: cover;
     background-attachment: fixed;
     min-height: 100vh;
-    transition: background-image 0.5s ease-in-out;
+    transition: color 0.3s ease;
+}
+
+body::after {
+    content: url("./assets/images/bg-dark.jpeg");
+    display: none;
 }
 
 @font-face {
@@ -207,6 +212,8 @@ body {
     height: 100dvh !important;
     border-radius: 0 !important;
     border: none !important;
+    animation: none !important;
+    transform: none !important;
 }
 
 .window-state-maximized #window-top {
@@ -257,7 +264,8 @@ body {
     height: calc(100% - var(--window-top-height, 2.5em));
 }
 
-#window-buttons{
+/* --- MacOS Window Buttons --- */
+.macos-buttons {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -266,40 +274,22 @@ body {
     gap: 0.6em;
 }
 
-#window-close {
+.macos-btn {
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 100%;
     width: var(--window-top-button-size);
     height: var(--window-top-button-size);
-    background-color: var(--close-color);
     transition: filter 0.2s ease;
+    cursor: pointer;
 }
 
-#window-minimize {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 100%;
-    width: var(--window-top-button-size);
-    height: var(--window-top-button-size);
-    background-color: var(--minimize-color);
-    transition: filter 0.2s ease;
-}
+.macos-close { background-color: var(--close-color); }
+.macos-minimize { background-color: var(--minimize-color); }
+.macos-maximize { background-color: var(--maximize-color); }
 
-#window-maximize {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 100%;
-    width: var(--window-top-button-size);
-    height: var(--window-top-button-size);
-    background-color: var(--maximize-color);
-    transition: filter 0.2s ease;
-}
-
-#window-close::before, #window-minimize::before, #window-maximize::before {
+.macos-btn::before {
     opacity: 0;
     transition: opacity 0.2s ease;
     font-size: 0.65em;
@@ -308,24 +298,46 @@ body {
     line-height: 1;
 }
 
-#window-close::before {
-    content: "\2715"; /* ✕ */
+.macos-close::before { content: "\2715"; }
+.macos-minimize::before { content: "\2212"; }
+.macos-maximize::before { content: "\002B"; }
+
+.macos-buttons:hover > .macos-btn::before { opacity: 1; }
+.macos-btn:hover { filter: brightness(0.85); }
+
+/* --- Windows Window Buttons --- */
+.windows-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+    border-radius: 0 var(--window-curve) 0 0;
+    overflow: hidden;
 }
 
-#window-minimize::before {
-    content: "\2212"; /* − */
+.windows-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3.5em;
+    height: 100%;
+    color: var(--text-primary);
+    transition: background-color 0.2s ease, color 0.2s ease;
+    cursor: pointer;
 }
 
-#window-maximize::before {
-    content: "\002B"; /* + */
+.windows-btn svg {
+    width: 10px;
+    height: 10px;
 }
 
-#window-buttons:hover > div::before {
-    opacity: 1;
+.windows-btn:hover {
+    background-color: var(--window-barrier);
 }
 
-#window-close:hover, #window-minimize:hover, #window-maximize:hover {
-    filter: brightness(0.85);
+.windows-close:hover {
+    background-color: #e81123;
+    color: white;
 }
 
 #main-portrait {
@@ -898,6 +910,7 @@ body {
     left: 50%;
     transform: translateX(-50%);
     display: flex;
+    align-items: flex-start;
     gap: 1.2em;
     padding: 0.8em 1.2em;
     background: var(--dock-bg);
@@ -928,6 +941,36 @@ body {
 
 .dock-item:active {
     transform: scale(1.1) translateY(-5px);
+}
+
+.static-dock-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+    opacity: 0.7;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.static-dock-item:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.dock-separator {
+    width: 1px;
+    background: var(--dock-border);
+    margin: 0 0.5em;
+    height: 3.5em;
+    flex-shrink: 0;
+}
+
+.dock-toggles {
+    display: flex;
+    gap: 0.5em;
+    align-items: flex-start;
 }
 
 .dock-icon {
@@ -1212,10 +1255,19 @@ body {
 }
 
 /* Skills Grid */
-.skills-grid {
+.skills-bento-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(14em, 1fr));
-    gap: 1.2em;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5em;
+}
+
+.skill-bento-card {
+    background: var(--card-bg);
+    border: 1px solid var(--window-barrier);
+    border-radius: 1em;
+    padding: 1.5em;
+    display: flex;
+    flex-direction: column;
 }
 
 .skill-category {
@@ -1406,23 +1458,28 @@ body {
     }
     
     .dock-container {
-        gap: 0.8em;
-        padding: 0.6em 1em;
-        width: max-content;
-        max-width: 95vw;
+        gap: 0.5em;
+        padding: 0.6em 0.8em;
+        width: 95vw;
+        max-width: 400px;
         bottom: 1em;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
+        justify-content: space-evenly;
+        overflow: hidden;
     }
     .dock-container::-webkit-scrollbar {
         display: none;
     }
     
     .dock-icon {
-        width: 2.6em;
-        height: 2.6em;
+        width: clamp(2em, 11vw, 2.8em);
+        height: clamp(2em, 11vw, 2.8em);
         border-radius: 0.6em;
+        flex-shrink: 1;
+    }
+
+    .dock-separator {
+        height: clamp(2em, 11vw, 2.8em);
+        margin: 0;
     }
     
     .dock-label {
@@ -1443,7 +1500,7 @@ body {
         gap: 0.1em;
     }
 
-    .skills-grid {
+    .skills-bento-grid {
         grid-template-columns: 1fr;
     }
 
@@ -1747,6 +1804,10 @@ body {
 
     .hero-image-wrapper {
         order: -1;
+    }
+
+    .hero-portrait {
+        max-width: 220px;
     }
 }
 

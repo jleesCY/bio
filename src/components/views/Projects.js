@@ -103,6 +103,24 @@ export default function Projects() {
                         </a>
                     </div>
                 </div>
+
+                {/* Footer Verse */}
+                <div style={{ animation: '0.8s ease-out 0.6s 1 both slowFadeUp', textAlign: 'center', marginTop: '4em', paddingBottom: '4em' }}>
+                    <p style={{ color: 'var(--text-muted)', fontStyle: 'italic', fontSize: '0.95em', maxWidth: '600px', margin: '0 auto', lineHeight: '1.6', whiteSpace: 'pre-line' }}>
+                        "Commit your work to the Lord,{"\n"}
+                        and your plans will be established."
+                    </p>
+                    <a 
+                        href="https://www.biblegateway.com/passage/?search=Proverbs+16:3&version=ESV" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        style={{ display: 'block', marginTop: '0.8em', color: 'var(--text-muted)', fontSize: '0.85em', fontWeight: '600', letterSpacing: '0.05em', textDecoration: 'none' }}
+                        onMouseEnter={e => e.currentTarget.style.color = 'var(--text-primary)'}
+                        onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}
+                    >
+                        Proverbs 16:3 (ESV)
+                    </a>
+                </div>
             </div>
         );
     }
@@ -135,18 +153,42 @@ export default function Projects() {
                 </button>
             </div>
 
-            <div className="projects-grid">
-                {displayProjects.map((project, index) => (
-                    <ProjectCard
-                        key={index}
-                        title={project.title}
-                        description={project.description}
-                        link={project.link}
-                        image={project.image}
-                        tags={project.tags}
-                        onClick={() => navigate(`/projects/${project.id}`)}
-                    />
-                ))}
+            {displayProjects.length === 0 ? (
+                <div style={{ textAlign: "center", marginTop: "4em", flexGrow: 1 }}>
+                    <p style={{ color: "var(--text-secondary)", fontStyle: 'italic', fontSize: '1.2em' }}>Nothing to show here...</p>
+                </div>
+            ) : (
+                <div className="projects-grid">
+                    {displayProjects.map((project, index) => (
+                        <ProjectCard
+                            key={index}
+                            title={project.title}
+                            description={project.description}
+                            link={project.link}
+                            image={project.image}
+                            tags={project.tags}
+                            onClick={() => navigate(`/projects/${project.id}`)}
+                        />
+                    ))}
+                </div>
+            )}
+
+            {/* Footer Verse */}
+            <div style={{ animation: '0.8s ease-out 0.6s 1 both slowFadeUp', textAlign: 'center', marginTop: '4em', paddingBottom: '4em' }}>
+                <p style={{ color: 'var(--text-muted)', fontStyle: 'italic', fontSize: '0.95em', maxWidth: '600px', margin: '0 auto', lineHeight: '1.6', whiteSpace: 'pre-line' }}>
+                    "Commit your work to the Lord,{"\n"}
+                    and your plans will be established."
+                </p>
+                <a 
+                    href="https://www.biblegateway.com/passage/?search=Proverbs+16:3&version=ESV" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    style={{ display: 'block', marginTop: '0.8em', color: 'var(--text-muted)', fontSize: '0.85em', fontWeight: '600', letterSpacing: '0.05em', textDecoration: 'none' }}
+                    onMouseEnter={e => e.currentTarget.style.color = 'var(--text-primary)'}
+                    onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}
+                >
+                    Proverbs 16:3 (ESV)
+                </a>
             </div>
         </div>
     );

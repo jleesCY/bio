@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { isMobile } from "react-device-detect";
 import mainPortrait from "../../assets/images/main-portrait.jpeg";
 import Social from "../Social";
 import instagramLogo from "../../assets/images/svgs/instagram.svg";
@@ -32,6 +33,29 @@ export default function Home() {
                         <Social image={linkedinLogo} url={"https://www.linkedin.com/in/joshuamlees/"} size={3.15}></Social>
                         <Social image={instagramLogo} url={"https://www.instagram.com/jleescy/"} size={2.8}></Social>
                     </div>
+                    {isMobile && (
+                        <div style={{ 
+                            marginTop: '2em', 
+                            padding: '1em 1.5em', 
+                            borderRadius: '0.8em', 
+                            background: 'var(--window-bg)', 
+                            border: '1px solid var(--window-barrier)',
+                            boxShadow: '0 4px 15px rgba(0,0,0,0.05)',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '0.8em',
+                            maxWidth: '100%'
+                        }}>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="16" x2="12" y2="12"></line>
+                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                            </svg>
+                            <p style={{ fontSize: '0.85em', color: 'var(--text-secondary)', fontStyle: 'italic', margin: 0, textAlign: 'left', lineHeight: '1.4' }}>
+                                For the full interactive windowed experience, please visit on a desktop device.
+                            </p>
+                        </div>
+                    )}
                 </div>
                 <div className="hero-image-wrapper">
                     <img src={mainPortrait} alt="Joshua Lees" className="hero-portrait" />
@@ -67,21 +91,24 @@ export default function Home() {
                 {/* Active Concepts Section */}
                 <div style={{ animation: '0.4s ease-out 0.2s 1 both slowFadeUp', margin: '0 auto', maxWidth: '1000px', width: '100%', paddingTop: '2em', paddingBottom: '2em' }}>
                     <h3 style={{ fontSize: '1em', textTransform: 'uppercase', letterSpacing: '0.2em', color: 'var(--text-muted)', marginBottom: '2.5em', textAlign: 'center' }}>Active Focus Highlights</h3>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '4em' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '3em' }}>
                         
                         {/* Professional Column */}
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5em' }}>
                             <h4 style={{ textAlign: 'center', color: 'var(--text-secondary)', margin: '0', textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: '1em' }}>Professional Focus</h4>
-                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.8em', justifyContent: 'center' }}>
+                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6em', justifyContent: 'center' }}>
                                 {professionalConcepts.map(concept => (
                                     <span key={concept} style={{
-                                        padding: '0.6em 1.2em',
+                                        padding: '0.4em 0.8em',
                                         borderRadius: '2em',
                                         backgroundColor: 'var(--window-bg)',
                                         border: '1px solid var(--window-barrier)',
-                                        fontSize: '0.95em',
+                                        fontSize: '0.85em',
                                         color: 'var(--text-primary)',
                                         fontWeight: '500',
+                                        textAlign: 'center',
+                                        whiteSpace: 'normal',
+                                        wordBreak: 'break-word',
                                         transition: 'transform 0.2s ease, box-shadow 0.2s ease',
                                         cursor: 'default',
                                         boxShadow: '0 2px 10px rgba(0,0,0,0.05)'
@@ -99,16 +126,19 @@ export default function Home() {
                         {/* Personal Column */}
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5em' }}>
                             <h4 style={{ textAlign: 'center', color: 'var(--text-secondary)', margin: '0', textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: '1em' }}>Personal Focus</h4>
-                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.8em', justifyContent: 'center' }}>
+                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6em', justifyContent: 'center' }}>
                                 {personalConcepts.map(concept => (
                                     <span key={concept} style={{
-                                        padding: '0.6em 1.2em',
+                                        padding: '0.4em 0.8em',
                                         borderRadius: '2em',
                                         backgroundColor: 'var(--window-bg)',
                                         border: '1px solid var(--window-barrier)',
-                                        fontSize: '0.95em',
+                                        fontSize: '0.85em',
                                         color: 'var(--text-primary)',
                                         fontWeight: '500',
+                                        textAlign: 'center',
+                                        whiteSpace: 'normal',
+                                        wordBreak: 'break-word',
                                         transition: 'transform 0.2s ease, box-shadow 0.2s ease',
                                         cursor: 'default',
                                         boxShadow: '0 2px 10px rgba(0,0,0,0.05)'

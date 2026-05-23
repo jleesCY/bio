@@ -57,8 +57,8 @@ export default function Blog() {
                 <p className="page-hero-subtitle">Thoughts, experiments, and technical deep-dives.</p>
             </div>
             {blogPosts.length === 0 ? (
-                <div className="blog-content" style={{ textAlign: "center" }}>
-                    <p style={{ color: "var(--text-secondary)", fontStyle: 'italic' }}>No posts yet. Check back soon for updates!</p>
+                <div className="blog-content" style={{ textAlign: "center", marginTop: "4em" }}>
+                    <p style={{ color: "var(--text-secondary)", fontStyle: 'italic', fontSize: '1.2em' }}>Nothing to show here...</p>
                 </div>
             ) : (
                 <div className="blog-master-card" style={{ background: 'var(--card-bg)', borderRadius: 'var(--window-curve)', border: '1px solid var(--window-barrier)', boxShadow: '0 4px 20px var(--card-shadow)', overflow: 'hidden', animation: '0.4s ease-out 0s 1 both slowFadeUp' }}>

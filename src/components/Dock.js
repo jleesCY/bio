@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { isMobile } from 'react-device-detect';
 import ThemeToggle from './ThemeToggle';
 
 // Sleek, monochrome line-art SVGs that inherit text color
@@ -38,7 +39,7 @@ const Icons = {
     )
 };
 
-export default function Dock({ windowState, setWindowState }) {
+export default function Dock({ windowState, setWindowState, osMode, setOsMode }) {
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -49,6 +50,8 @@ export default function Dock({ windowState, setWindowState }) {
         { id: 'blog', label: 'Notes', icon: Icons.blog },
         { id: 'contact', label: 'Contact', icon: Icons.contact }
     ];
+
+    const toggleOs = () => setOsMode(prev => prev === 'macos' ? 'windows' : 'macos');
 
     return (
         <div className="dock-container">
@@ -73,9 +76,23 @@ export default function Dock({ windowState, setWindowState }) {
                     </div>
                 );
             })}
-            <div style={{ width: '1px', background: 'var(--dock-border)', margin: '0 0.5em' }}></div>
-            <div className="theme-toggle-item" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, padding: '0 0.5em' }}>
-                <ThemeToggle />
+            <div className="dock-separator"></div>
+            <div className="dock-toggles">
+                            {!isMobile && (
+                                <div className="static-dock-item" onClick={toggleOs} title={`Switch to ${osMode === 'macos' ? 'Windows' : 'macOS'} mode`}>
+                                    <div className="dock-icon">
+                                        {osMode === 'macos' ? (
+                                            <svg width="22" height="22" viewBox="0 0 384 512" fill="currentColor" stroke="none">
+                                                <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+                                            </svg>
+                                        ) : (
+                                            <svg width="22" height="22" viewBox="0 0 448 512" fill="currentColor" stroke="none">
+                                                <path d="M0 93.7l183.6-25.3v177.4H0V93.7zm0 324.6l183.6 25.3V268.4H0v149.9zm203.8 28L448 480V268.4H203.8v177.9zm0-380.6v180.1H448V32L203.8 65.7z"/>
+                                            </svg>
+                                        )}
+                                    </div>
+                                </div>
+                            )}                <ThemeToggle />
             </div>
         </div>
     );
