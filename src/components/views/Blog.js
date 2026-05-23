@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import ReactMarkdown from 'react-markdown';
 import { blogPosts } from "../../data/blog";
 
 export default function Blog() {
-    const [selectedPost, setSelectedPost] = useState(null);
+    const { blogId } = useParams();
+    const navigate = useNavigate();
     const [markdownContent, setMarkdownContent] = useState("");
+
+    const selectedPost = blogId ? blogPosts.find(p => p.id === blogId) : null;
 
     useEffect(() => {
         if (selectedPost) {
@@ -20,7 +24,7 @@ export default function Blog() {
         return (
             <div className="view-container fade-in">
                 <button 
-                    onClick={() => setSelectedPost(null)}
+                    onClick={() => navigate('/blog')}
                     style={{
                         marginBottom: '1em',
                         padding: '0.5em 1em',
@@ -43,35 +47,29 @@ export default function Blog() {
 
     return (
         <div className="view-container fade-in">
-            <h2 className="view-title">Blog</h2>
+            <div className="page-hero" style={{ background: 'linear-gradient(135deg, rgba(52,199,89,0.1), transparent)' }}>
+                <h2 className="page-hero-title">My Notes</h2>
+                <p className="page-hero-subtitle">Thoughts, experiments, and technical deep-dives.</p>
+            </div>
             {blogPosts.length === 0 ? (
                 <div className="blog-content" style={{ textAlign: "center" }}>
                     <p style={{ color: "var(--text-secondary)", fontStyle: 'italic' }}>No posts yet. Check back soon for updates!</p>
                 </div>
             ) : (
-                <div className="blog-list" style={{ display: 'flex', flexDirection: 'column', gap: '1.5em' }}>
-                    {blogPosts.map((post) => (
-                        <div 
-                            key={post.id} 
-                            className="blog-card"
-                            onClick={() => setSelectedPost(post)}
-                            style={{
-                                padding: '1.5em',
-                                borderRadius: 'var(--window-curve)',
-                                backgroundColor: 'var(--card-bg)',
-                                border: '1px solid var(--window-barrier)',
-                                cursor: 'pointer',
-                                transition: 'all 0.2s ease',
-                                boxShadow: '1px 1px 5px var(--card-shadow)'
-                            }}
-                            onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
-                            onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
-                        >
-                            <h3 style={{ margin: '0 0 0.5em 0', color: 'var(--text-primary)' }}>{post.title}</h3>
-                            <p style={{ margin: '0 0 0.5em 0', fontSize: '0.85em', color: 'var(--text-muted)' }}>{post.date}</p>
-                            <p style={{ margin: '0', color: 'var(--text-secondary)', lineHeight: '1.4' }}>{post.description}</p>
-                        </div>
-                    ))}
+                <div className="blog-master-card" style={{ background: 'var(--card-bg)', borderRadius: 'var(--window-curve)', border: '1px solid var(--window-barrier)', boxShadow: '0 4px 20px var(--card-shadow)', overflow: 'hidden', animation: '0.4s ease-out 0s 1 both slowFadeUp' }}>
+                    <div className="editorial-list">
+                        {[...blogPosts].sort((a, b) => new Date(b.date) - new Date(a.date)).map((post) => (
+                            <div 
+                                key={post.id} 
+                                className="blog-card"
+                                onClick={() => navigate(`/blog/${post.id}`)}
+                            >
+                                <span style={{ fontSize: '0.9em', color: 'var(--text-muted)', marginBottom: '0.5em', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{post.date}</span>
+                                <h3 style={{ margin: '0 0 0.2em 0', color: 'var(--text-primary)', fontSize: '1.8em', fontWeight: '700' }}>{post.title}</h3>
+                                <p style={{ margin: '0', color: 'var(--text-secondary)', lineHeight: '1.6', fontSize: '1.1em', maxWidth: '800px' }}>{post.description}</p>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             )}
         </div>

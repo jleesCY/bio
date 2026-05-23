@@ -1,22 +1,26 @@
 # Welcome to My Blog!
 
-Hello and welcome to my personal blog space! My name is Joshua Lees, and I’m a Developer and Modeling & Simulation Engineer.
+Hello and welcome to my personal blog space! I’m Joshua Lees, a Modeling & Simulation Engineer by day and a creative developer by night. 
 
-## About Me
+This space is where those two worlds collide. I've always believed that heavy-duty data architecture doesn't have to look like a legacy terminal, and beautiful web interfaces shouldn't sacrifice raw performance. 
 
-I am passionate about building aesthetic, high-performance web interfaces. By day, I work as a Modeling and Simulation Engineer—a role that allows me to bring deep analytical precision and advanced visualization techniques to the web applications and tools I build.
+## The Intersection of Simulation & Design
 
-### What to Expect
+In my day job within defense simulation, I work with complex LVC (Live, Virtual, and Constructive) environments and SIL (Software-in-the-Loop) dataflows. My focus is on extracting massive, high-rate data streams—like blending live flight recordings with simulation outputs—and translating them into high-performance databases and readable, intuitive UIs. 
 
-In this blog, I plan to share my thoughts and experiences on a variety of topics, including:
+When I log off, I bring that same analytical precision to my personal development. For me, the ultimate goal is building sleek, highly functional interfaces built on top of efficient backends that prioritize performance and low resource consumption. 
 
-- **Web Development**: Tips, tricks, and tutorials on React, CSS, and modern web design.
-- **Data Visualization**: Exploring complex data sets and finding intuitive ways to display them.
-- **Personal Projects**: Behind-the-scenes looks at what I’m building, like this very portfolio site or my mobile browser, `mi-browser`.
-- **Engineering & Simulation**: Insights from my day job and how those analytical skills translate into better software engineering.
+## What to Expect
 
-I believe in continuous learning, and writing is a great way to solidify knowledge and share it with others. 
+Moving forward, I’ll be sharing deep dives, architectural breakdowns, and lessons learned across a few core areas:
 
-Stay tuned for more posts, and feel free to reach out via the Contact page if you'd like to chat or collaborate!
+*   **Sleek UI/UX Design & Development:** Exploring modern front-end capabilities to build interfaces that are simple, intuitive, and highly customizable.
+*   **Data Visualization & Extraction:** Finding elegant ways to display complex, multi-dimensional datasets without melting the user's browser.
+*   **Engineering & Simulation:** Insights into how systems programming, test automation, and simulation methodologies translate into writing cleaner, more robust software.
+*   **Personal Project Logs:** Behind-the-scenes engineering breakdowns of things I'm building, like the architecture of this portfolio site, my Boolean logic simulator `NANDbox`, and my mobile browser `mi-browser`—where I focus on customizability without draining system resources.
+
+I’m a firm believer that the best way to solidify complex technical concepts is to teach them. I hope you find these write-ups useful, insightful, or at least a little inspiring. 
+
+Stay tuned for the first technical deep dive, and if you want to talk shop, swap ideas, or collaborate, hit me up via the Contact page!
 
 *— Joshua*

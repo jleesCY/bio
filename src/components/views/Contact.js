@@ -14,7 +14,10 @@ export default function Contact() {
 
     return (
         <div className="view-container fade-in">
-            <h2 className="view-title">Contact Me</h2>
+            <div className="page-hero" style={{ background: 'linear-gradient(135deg, rgba(90,200,250,0.1), transparent)' }}>
+                <h2 className="page-hero-title">Contact</h2>
+                <p className="page-hero-subtitle">Let's build something together.</p>
+            </div>
             <div className="contact-form-container">
                 <p style={{ marginBottom: '1.5em', color: 'var(--text-secondary)', lineHeight: '1.5' }}>Have a question or want to work together? Send me a message!</p>
                 <form className="contact-form" onSubmit={handleSubmit}>

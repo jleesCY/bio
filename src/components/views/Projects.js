@@ -1,68 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import ProjectCard from "../ProjectCard";
-import ReactMarkdown from 'react-markdown';
+import { personalProjects, professionalProjects } from "../../data/projectsData";
 
-// Assets
-import browserIcon from "../../assets/images/svgs/browser.svg";
-import logicIcon from "../../assets/images/svgs/logic-gate.svg";
-import boxIcon from "../../assets/images/svgs/box.svg";
 import githubLogo from "../../assets/images/svgs/github.svg";
 
 export default function Projects() {
+    const { projectId } = useParams();
+    const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState("all");
-    const [selectedProject, setSelectedProject] = useState(null);
-    const [markdownContent, setMarkdownContent] = useState("");
 
-    const personalProjects = [
-        {
-            id: "mi-browser",
-            title: "mi-browser",
-            description: "A hyper-lightweight, distraction-free mobile browser designed for the modern web, featuring unique 3D visual effects.",
-            link: "https://github.com/jleesCY/mi-browser",
-            image: browserIcon,
-            tags: ["React Native", "Expo", "3D UI"],
-            file: "mi-browser.md"
-        },
-        {
-            id: "nandbox",
-            title: "NANDbox",
-            description: "A powerful web-based digital logic simulation tool that allows users to design, build, and test boolean circuits interactively.",
-            link: "https://github.com/jleesCY/NANDbox",
-            image: logicIcon,
-            tags: ["React", "Digital Logic", "Simulation"],
-            file: "nandbox.md"
-        },
-        {
-            id: "letter-boxed",
-            title: "Letter Boxed",
-            description: "An algorithmic solver and clean interactive interface for the popular NYT word puzzle game, Letter Boxed.",
-            link: "https://github.com/jleesCY/letter-boxed",
-            image: boxIcon,
-            tags: ["React", "Algorithms", "Game Dev"],
-            file: "letter-boxed.md"
-        },
-    ];
-
-    const professionalProjects = [
-        {
-            id: "professional-work",
-            title: "Professional Work",
-            description: "Details about my professional projects and contributions.",
-            link: "#",
-            tags: ["Enterprise", "Collaboration"],
-            file: null
-        }
-    ];
-
-    useEffect(() => {
-        if (selectedProject && selectedProject.file) {
-            import(`../../data/projects/${selectedProject.file}`)
-                .then(res => fetch(res.default))
-                .then(res => res.text())
-                .then(text => setMarkdownContent(text))
-                .catch(err => console.error("Error loading project markdown:", err));
-        }
-    }, [selectedProject]);
+    const allProjects = [...professionalProjects, ...personalProjects];
+    const selectedProject = projectId ? allProjects.find(p => p.id === projectId) : null;
 
     const displayProjects = activeTab === "all" 
         ? [...professionalProjects, ...personalProjects]
@@ -70,30 +19,89 @@ export default function Projects() {
             ? professionalProjects 
             : personalProjects;
 
-    if (selectedProject && selectedProject.file) {
+    // Project Details View
+    if (selectedProject && selectedProject.details) {
         return (
             <div className="view-container fade-in">
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1em' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3em' }}>
                     <button 
-                        onClick={() => setSelectedProject(null)}
+                        onClick={() => navigate('/projects')}
                         style={{
-                            padding: '0.5em 1em',
+                            padding: '0.6em 1.2em',
                             borderRadius: '0.5em',
                             border: '1px solid var(--window-barrier)',
                             background: 'var(--window-bg)',
                             color: 'var(--text-primary)',
                             cursor: 'pointer',
-                            fontFamily: 'var(--main-font)'
+                            fontFamily: 'var(--main-font)',
+                            fontWeight: '600',
+                            transition: 'background 0.2s ease'
                         }}
+                        onMouseEnter={e => e.currentTarget.style.background = 'var(--card-bg)'}
+                        onMouseLeave={e => e.currentTarget.style.background = 'var(--window-bg)'}
                     >
                         &larr; Back to Projects
                     </button>
-                    <a href={selectedProject.link} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-primary)' }} title="View Source on GitHub">
-                        <img src={githubLogo} alt="GitHub" style={{ width: '24px', height: '24px', filter: 'brightness(var(--dock-icon-color-filter, 1))' }} />
-                    </a>
                 </div>
-                <div className="markdown-container">
-                    <ReactMarkdown>{markdownContent}</ReactMarkdown>
+
+                <div className="project-details-container">
+                    <div className="project-details-hero">
+                        <img src={selectedProject.image} alt={selectedProject.title} className="project-details-cover" />
+                        <div className="project-details-hero-content">
+                            <h2 className="project-details-title">{selectedProject.title}</h2>
+                        </div>
+                    </div>
+
+                    <p className="project-details-summary">
+                        {selectedProject.description}
+                    </p>
+
+                    <div className="project-tech-row">
+                        {selectedProject.tags.map(tech => (
+                            <span key={tech} className="project-tech-pill">{tech}</span>
+                        ))}
+                    </div>
+
+                    <div className="project-details-section">
+                        <h3>The Details</h3>
+                        {Array.isArray(selectedProject.details) 
+                            ? selectedProject.details.map((paragraph, i) => (
+                                <p key={i}>{paragraph}</p>
+                            ))
+                            : <p>{selectedProject.details}</p>
+                        }
+                    </div>
+
+                    <div className="project-details-section">
+                        <h3>Key Features</h3>
+                        <ul>
+                            {selectedProject.features.map((feature, i) => (
+                                <li key={i}>
+                                    <strong style={{ color: 'var(--text-primary)' }}>{feature.split(':')[0]}:</strong>
+                                    {feature.split(':')[1]}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    <div className="project-details-section">
+                        <h3>Technical Challenges</h3>
+                        <div className="project-challenge-block">
+                            {Array.isArray(selectedProject.challenges)
+                                ? selectedProject.challenges.map((paragraph, i) => (
+                                    <p key={i} style={i === 0 ? { marginTop: 0 } : { marginTop: '1em' }}>{paragraph}</p>
+                                ))
+                                : <p style={{ margin: 0 }}>{selectedProject.challenges}</p>
+                            }
+                        </div>
+                    </div>
+
+                    <div className="project-links">
+                        <a href={selectedProject.link} target="_blank" rel="noopener noreferrer" className="project-link-btn">
+                            <img src={githubLogo} alt="GitHub" style={{ width: '20px', height: '20px', filter: 'brightness(0) invert(1)' }} />
+                            View Source
+                        </a>
+                    </div>
                 </div>
             </div>
         );
@@ -101,7 +109,10 @@ export default function Projects() {
 
     return (
         <div className="view-container fade-in">
-            <h2 className="view-title">Projects</h2>
+            <div className="page-hero" style={{ background: 'linear-gradient(135deg, rgba(161,85,185,0.1), transparent)' }}>
+                <h2 className="page-hero-title">Projects</h2>
+                <p className="page-hero-subtitle">A showcase of things I've built.</p>
+            </div>
             
             <div className="projects-tabs">
                 <button 
@@ -125,15 +136,15 @@ export default function Projects() {
             </div>
 
             <div className="projects-grid">
-                {displayProjects.map((project, idx) => (
+                {displayProjects.map((project, index) => (
                     <ProjectCard
-                        key={idx}
+                        key={index}
                         title={project.title}
                         description={project.description}
                         link={project.link}
                         image={project.image}
                         tags={project.tags}
-                        onClick={() => project.file && setSelectedProject(project)}
+                        onClick={() => navigate(`/projects/${project.id}`)}
                     />
                 ))}
             </div>
