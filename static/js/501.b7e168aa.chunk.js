@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkbiography=self.webpackChunkbiography||[]).push([[501],{501:(a,b,d)=>{a.exports=d.p+"static/media/nandbox.89b9b212fda3617ddada.md"}}]);

@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkbiography=self.webpackChunkbiography||[]).push([[924],{924:(e,a,p)=>{e.exports=p.p+"static/media/letter-boxed.216a6c55bfd0ff9cef09.md"}}]);
