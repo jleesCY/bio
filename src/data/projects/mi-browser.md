@@ -1,11 +1,6 @@
 ### Details
 mi. Browser is an open-source, minimalist mobile browser engineered to eliminate viewport clutter and optimize one-handed navigation through a centralized, bottom-docked control module called 'The Pill'. Designed so that every primary interaction remains within natural thumb reach, users can execute diverse navigation commands, view history, and trigger layout changes via fluid gestures on the Pill itself. By stripping away legacy browser UI overhead, it provides a distraction-free canvas focused entirely on content delivery.
 
-```python
-def main():
-  print("Hello, Horld!")
-```
-
 Built with a strict privacy-native architecture, all application state—including history management, multi-tab sessions, and granular configuration profiles—is persisted locally using highly optimized `AsyncStorage` lookups. This architecture entirely eliminates network overhead for configuration changes, ensuring instantaneous state resolution, lightning-fast application launches, and complete data autonomy. 
 
 Furthermore, the design philosophy prioritizes deep user agency. This is manifested in granular customizability engines that grant users absolute command over both the visual interface and backend behaviors, allowing the browser to adapt precisely to individual workflows.
