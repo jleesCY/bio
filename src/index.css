@@ -1060,7 +1060,10 @@ body::after {
     line-height: 1.6;
     font-size: 1.05em;
     max-width: 65ch;
+    width: 100%;
     margin: 0 auto;
+    overflow-wrap: break-word;
+    box-sizing: border-box;
 }
 
 .markdown-container h1, 
@@ -1109,6 +1112,8 @@ body::after {
     font-size: 0.9em;
     color: var(--text-primary);
     border: 1px solid var(--window-barrier);
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 .markdown-container pre {
@@ -1119,6 +1124,8 @@ body::after {
     border: 1px solid var(--window-barrier);
     margin-bottom: 1.5em;
     font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .markdown-container pre code {
