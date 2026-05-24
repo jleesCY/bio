@@ -1,9 +1,9 @@
 {
   "files": {
     "main.css": "/bio/static/css/main.a5be7813.css",
-    "main.js": "/bio/static/js/main.1624472c.js",
+    "main.js": "/bio/static/js/main.bc8c5135.js",
     "static/js/924.c2894b40.chunk.js": "/bio/static/js/924.c2894b40.chunk.js",
-    "static/js/222.a2c5d67d.chunk.js": "/bio/static/js/222.a2c5d67d.chunk.js",
+    "static/js/222.ff26b76d.chunk.js": "/bio/static/js/222.ff26b76d.chunk.js",
     "static/js/501.5ba57b6d.chunk.js": "/bio/static/js/501.5ba57b6d.chunk.js",
     "static/js/877.da87c14e.chunk.js": "/bio/static/js/877.da87c14e.chunk.js",
     "static/js/453.a95e9d1c.chunk.js": "/bio/static/js/453.a95e9d1c.chunk.js",
@@ -15,7 +15,7 @@
     "static/media/nandbox.png": "/bio/static/media/nandbox.1c03f9f4a6906b6ae46d.png",
     "static/media/bg-dark.jpeg": "/bio/static/media/bg-dark.633b858913565d9f66ab.jpeg",
     "static/media/github.svg": "/bio/static/media/github.8d1bc524d64f25bee143d25b34c557ac.svg",
-    "static/media/mi-browser.md": "/bio/static/media/mi-browser.83de97f19438b761417d.md",
+    "static/media/mi-browser.md": "/bio/static/media/mi-browser.33861f35d90342308400.md",
     "static/media/instagram.svg": "/bio/static/media/instagram.a0a9a83448ddb5827d70493a84d37806.svg",
     "static/media/nandbox.md": "/bio/static/media/nandbox.1b8414f5e640512ed4ed.md",
     "static/media/letter-boxed.md": "/bio/static/media/letter-boxed.65fcfd79a11c6547aa59.md",
@@ -23,11 +23,11 @@
     "index.html": "/bio/index.html",
     "static/media/linkedin.svg": "/bio/static/media/linkedin.c341cc1c307221b0fe42599c619ceeaf.svg",
     "main.a5be7813.css.map": "/bio/static/css/main.a5be7813.css.map",
-    "main.1624472c.js.map": "/bio/static/js/main.1624472c.js.map",
+    "main.bc8c5135.js.map": "/bio/static/js/main.bc8c5135.js.map",
     "453.a95e9d1c.chunk.js.map": "/bio/static/js/453.a95e9d1c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a5be7813.css",
-    "static/js/main.1624472c.js"
+    "static/js/main.bc8c5135.js"
   ]
 }
