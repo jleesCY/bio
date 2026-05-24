@@ -6,12 +6,17 @@ import { vscDarkPlus, oneLight } from 'react-syntax-highlighter/dist/esm/styles/
 import ProjectCard from "../ProjectCard";
 import { personalProjects, professionalProjects } from "../../data/projectsData";
 import githubLogo from "../../assets/images/svgs/github.svg";
+import { isMobile } from "react-device-detect";
 
 export default function Projects() {
     const { projectId } = useParams();
     const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState("all");
     const [isDark, setIsDark] = useState(document.body.classList.contains('dark-theme'));
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [projectId]);
 
     useEffect(() => {
         const observer = new MutationObserver(() => {
@@ -185,19 +190,33 @@ export default function Projects() {
                     <p style={{ color: "var(--text-secondary)", fontStyle: 'italic', fontSize: '1.2em' }}>Nothing to show here...</p>
                 </div>
             ) : (
-                <div className="projects-grid">
-                    {displayProjects.map((project, index) => (
-                        <ProjectCard
-                            key={index}
-                            title={project.title}
-                            description={project.description}
-                            link={project.link}
-                            image={project.image}
-                            tags={project.tags}
-                            onClick={() => navigate(`/projects/${project.id}`)}
-                        />
-                    ))}
-                </div>
+                (() => {
+                    const columns = isMobile ? 1 : 2;
+                    const masonryCols = Array.from({ length: columns }, () => []);
+                    displayProjects.forEach((project, index) => {
+                        masonryCols[index % columns].push(project);
+                    });
+                    
+                    return (
+                        <div className="projects-grid" style={{ display: 'flex', alignItems: 'flex-start' }}>
+                            {masonryCols.map((col, colIndex) => (
+                                <div key={colIndex} style={{ display: 'flex', flexDirection: 'column', gap: '2em', flex: 1, minWidth: 0 }}>
+                                    {col.map((project, index) => (
+                                        <ProjectCard
+                                            key={`${colIndex}-${index}`}
+                                            title={project.title}
+                                            description={project.description}
+                                            link={project.link}
+                                            image={project.image}
+                                            tags={project.tags}
+                                            onClick={() => navigate(`/projects/${project.id}`)}
+                                        />
+                                    ))}
+                                </div>
+                            ))}
+                        </div>
+                    );
+                })()
             )}
 
             {/* Footer Verse */}

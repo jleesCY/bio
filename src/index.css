@@ -103,7 +103,9 @@
 body,html {
     padding: 0;
     margin: 0;
+    font-size: 90%;
     font-family: var(--main-font);
+    font-weight: 500;
     color: var(--text-primary);
     transition: color 0.3s ease;
     overflow-x: hidden;
@@ -168,7 +170,7 @@ body::after {
 #window {
     animation: 0.6s ease-in-out 0s 1 fadeItemIn;
     width: 100%;
-    max-width: 70em;
+    max-width: 80em;
     height: fit-content;
     padding: 0;
     margin: 0;
@@ -420,7 +422,6 @@ body::after {
     font-family: var(--main-font);
     transition: all 0.2s ease, background-color 0.3s ease, border-color 0.3s ease;
     break-inside: avoid;
-    margin-bottom: 2em;
 }
 .project-card:hover {
     box-shadow: 1px 1px 15px var(--card-hover-shadow);
@@ -460,7 +461,7 @@ body::after {
     color: var(--text-secondary);
     font-size: 1em;
     line-height: 1.4;
-    font-weight: lighter;
+    font-weight: 300;
     flex-grow: 1;
 }
 
@@ -588,7 +589,7 @@ body::after {
     margin: 0;
     font-size: clamp(1.1em, 2.5vw, 1.3em);
     color: var(--text-secondary);
-    font-weight: 400;
+    font-weight: 500;
     max-width: 600px;
     z-index: 1;
 }
@@ -677,11 +678,6 @@ body::after {
     padding: 0;
     filter: none;
     border-bottom: 1px solid var(--window-barrier);
-    transition: transform 0.4s ease;
-}
-
-.project-card:hover .project-image {
-    transform: scale(1.05);
 }
 
 .project-details-hero {
@@ -907,11 +903,13 @@ body::after {
 }
 
 .projects-grid {
-    column-count: 3;
-    column-width: 300px;
-    column-gap: 2em;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2em;
     padding-bottom: 2em;
     width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 .fade-in {
@@ -1719,28 +1717,29 @@ body::after {
 }
 
 .projects-grid {
-    column-count: 3;
-    column-width: 300px;
-    column-gap: 2em;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2em;
     padding-bottom: 2em;
     width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 .project-card {
     background-color: var(--card-bg);
     border-radius: var(--window-curve);
     border: 1px solid var(--window-barrier);
-    padding: 1.5em;
     width: 100%;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     cursor: pointer;
     box-shadow: 0 4px 20px var(--card-shadow);
     text-decoration: none;
     color: inherit;
     break-inside: avoid;
-    margin-bottom: 2em;
 }
 
 .project-card:hover {
