@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkbiography=self.webpackChunkbiography||[]).push([[222],{841:(e,s,p)=>{e.exports=p.p+"static/media/mi-browser.33861f35d90342308400.md"}}]);

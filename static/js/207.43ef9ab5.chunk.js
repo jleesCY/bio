@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbiography=self.webpackChunkbiography||[]).push([[207],{207:(a,e,p)=>{a.exports=p.p+"static/media/bio-page.40366af21afbb971dcde.md"}}]);

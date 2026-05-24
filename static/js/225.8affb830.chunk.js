@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbiography=self.webpackChunkbiography||[]).push([[225],{225:(e,b,s)=>{e.exports=s.p+"static/media/boxed-letters.313dbb608a8b60effc94.md"}}]);
